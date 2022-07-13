@@ -1,0 +1,6 @@
+{
+    "env":{
+        "MONGO_ATLAS_PASSWORD": "vivekmaniyar",
+        "JWT_SECRET": "nodetoken"
+    }
+}
