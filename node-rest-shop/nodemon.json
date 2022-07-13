@@ -1,6 +1,6 @@
 {
     "env":{
-        "MONGO_ATLAS_PASSWORD": "vivekmaniyar",
-        "JWT_SECRET": "nodetoken"
+        "MONGO_ATLAS_PASSWORD": "mongo-password",
+        "JWT_SECRET": "secret-key"
     }
 }
