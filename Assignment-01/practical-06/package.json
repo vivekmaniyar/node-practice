@@ -1,0 +1,14 @@
+{
+  "name": "practical-6",
+  "version": "1.0.0",
+  "description": "Extracting zip file",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vivek Maniyar",
+  "license": "ISC",
+  "dependencies": {
+    "extract-zip": "^2.0.1"
+  }
+}

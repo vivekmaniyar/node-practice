@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script> 
+        $(document).ready(function(){
+            $("button").click(function(e){
+                e.preventDefault();
+                $.ajax({
+                    url: "http://localhost:3000/gethello",
+                    type: "GET",
+                    dataType: "json",
+                    success: function(data){
+                        $("#result").html(data.message);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <button id="btn">Say Hello</button>
+    <div id="result"></div>
+</body>
+</html>

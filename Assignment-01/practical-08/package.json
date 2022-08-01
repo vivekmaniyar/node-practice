@@ -1,0 +1,15 @@
+{
+  "name": "practical-8",
+  "version": "1.0.0",
+  "description": "Using node-fetch to fetch data from google page",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vivek Maniyar",
+  "license": "ISC",
+  "dependencies": {
+    "node-fetch": "^3.2.10"
+  }
+}

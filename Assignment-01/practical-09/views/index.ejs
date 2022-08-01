@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Database</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        table,tr,td,th {
+            border-collapse: collapse;
+            border: 1px solid black;
+            padding: 5px;
+        }
+        .employeeform, .formrow, .formcell {
+            border: none;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            let url = "http://localhost:3000/getdata";
+            $.get(url,function(data,status){
+                console.log(data);
+                let html = "";
+                for(let i=0;i<data.length;i++){
+                    html += "<tr>";
+                    html += "<td>"+data[i].ID+"</td>";
+                    html += "<td>"+data[i].Name+"</td>";
+                    html += "<td>"+data[i].Designation+"</td>";
+                    html += "<td>"+data[i].Salary+"</td>";
+                    html += "</tr>";
+                }
+                $("#tabledata").append(html);
+            });
+        });
+    </script>
+</head>
+<body>
+    <h2>Employee Data</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Designation</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody id="tabledata">
+        </tbody>
+    </table>
+    <h2>Insert new employee</h2>
+    <form action="/addemployee" method="post">
+        <table class="employeeform">
+            <tr class="formrow">
+                <td class="formcell"><label>Name:</label></td>
+                <td class="formcell"><input type="text" name="Name" required></td>
+            </tr>
+            <tr class="formrow">
+                <td class="formcell"><label>Designation:</label></td>
+                <td class="formcell"><input type="text" name="Designation" required></td>
+            </tr>
+            <tr class="formrow">
+                <td class="formcell"><label>Salary:</label></td>
+                <td class="formcell"><input type="number" name="Salary" required></td>
+            </tr>
+            <tr class="formrow">
+                <td class="formcell"><input type="submit" value="Add employee"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

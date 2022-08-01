@@ -1,0 +1,16 @@
+{
+  "name": "practical-4",
+  "version": "1.0.0",
+  "description": "Demo of websocket using mario-chatbot module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "author": "Vivek Maniyar",
+  "license": "ISC",
+  "dependencies": {
+    "mario-chatbot": "^1.0.0",
+    "ws": "^8.8.1"
+  }
+}
