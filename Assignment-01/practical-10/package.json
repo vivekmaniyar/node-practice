@@ -1,0 +1,20 @@
+{
+  "name": "practical-10",
+  "version": "1.0.0",
+  "description": "Setting scripts in package.json",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js",
+    "readline": "node readline-demo.js",
+    "url": "node url.js",
+    "chatbot": "node readline-chatbot.js"
+  },
+  "author": "Vivek Maniyar",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mocha": "^10.0.0",
+    "mysql": "^2.18.1"
+  }
+}

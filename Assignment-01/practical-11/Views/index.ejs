@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Cricket Score</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url: 'https://cricbuzz-cricket.p.rapidapi.com/mcenter/v1/44181/scard',
+                headers: {
+                    'X-RapidAPI-Key': 'rapidapi-key',
+                    'X-RapidAPI-Host': 'cricbuzz-cricket.p.rapidapi.com'
+                },
+                method: 'GET',
+                dataType: 'json',
+                success: function(data){
+                    console.log(data);
+                    var html = '';
+                    html+='<p>'+data.matchHeader.seriesName+'</p>';
+                    html+='<p>'+data.matchHeader.matchDescription+'</p>';
+                    html+='<p>'+data.matchHeader.matchTeamInfo[0].battingTeamShortName+
+                        ' vs '+
+                        data.matchHeader.matchTeamInfo[0].bowlingTeamShortName+
+                        '</p>';
+                    html+='<p>'+data.matchHeader.status+'</p>';
+                    html+='<p>'+
+                        data.scoreCard[0].scoreDetails.runs
+                        +'/'+
+                        data.scoreCard[0].scoreDetails.wickets+
+                        ' ('+data.scoreCard[0].scoreDetails.overs+')'+
+                        '</p>';
+                    $('#data').html(html);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Live Cricket Score</h1>
+    <div id="data"></div>
+</body>
+</html>
