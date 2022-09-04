@@ -1,0 +1,16 @@
+{
+  "name": "practical-01",
+  "version": "1.0.0",
+  "description": "Single and multiple file upload with validation",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vivek Maniyar",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "multer": "^1.4.5-lts.1"
+  }
+}

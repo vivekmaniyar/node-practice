@@ -1,0 +1,17 @@
+{
+  "name": "practical-03",
+  "version": "1.0.0",
+  "description": "Login using redis session store",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vivek Maniyar",
+  "license": "ISC",
+  "dependencies": {
+    "connect-redis": "^6.1.3",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "redis": "^4.3.0"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "practical-04",
+  "version": "1.0.0",
+  "description": "JWT login with template engine",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vivek Maniyar",
+  "license": "ISC"
+}
