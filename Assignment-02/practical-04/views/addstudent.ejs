@@ -1,0 +1,63 @@
+<!-- Form to add new student -->
+<html>
+<head>
+    <title>Add Student</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- add student on form submit -->
+    <script>
+        $(document).ready(function(){
+            $("#addstudent").submit(function(event){
+                event.preventDefault();
+                var student = {
+                    name: $("#name").val(),
+                    email: $("#email").val(),
+                    class: $("#class").val(),
+                    semester: $("#semester").val()
+                }
+                $.ajax({
+                    url: "/students",
+                    type: "POST",
+                    data: student,
+                    success: function(result){
+                        window.location.href = "/students";
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title" style="text-align: center;">Add Student</h3>
+                </div>
+                <div class="panel-body">
+                    <form id="addstudent">
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" class="form-control" id="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" class="form-control" id="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="class">Class:</label>
+                            <input type="text" class="form-control" id="class">
+                        </div>
+                        <div class="form-group">
+                            <label for="semester">Semester:</label>
+                            <input type="text" class="form-control" id="semester">
+                        </div>
+                        <button type="submit" class="btn btn-default">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

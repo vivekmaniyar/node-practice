@@ -1,18 +1,19 @@
-//JWT login with express
 const express = require('express');
 const app = express();
 const jwt = require('jsonwebtoken');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const User = require('./models/user');
-const bcrypt = require('bcryptjs');
+const Usercontroller = require('./Controllers/Usercontroller');
+const Studentcontroller = require('./Controllers/Studentcontroller');
+const cookieParser = require('cookie-parser');
 const config = require('./config');
 const port = process.env.PORT || 3000;
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(cookieParser());
 app.use(cors());
+app.set('view engine', 'ejs');
 
 mongoose.connect(config.database, { useNewUrlParser: true }, (err) => {
     if (err) {
@@ -22,45 +23,39 @@ mongoose.connect(config.database, { useNewUrlParser: true }, (err) => {
     }
 });
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
-});
+//Users
+app.get('/', Usercontroller.login_page);
+app.post('/login', Usercontroller.user_login);
+app.get('/logout', Usercontroller.user_logout);
+app.get('/register', Usercontroller.register_page);
+app.post('/register', Usercontroller.user_register);
 
-app.post('/register', (req, res) => {
-    let user = new User({
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password
-    });
-    user.save((err) => {
-        if (err) {
-            res.json({ success: false, message: 'Could not save user. Error: ', err });
-        } else {
-            res.json({ success: true, message: 'User saved!' });
-        }
-    });
-});
-
-app.post('/login', (req, res) => {
-    User.findOne({ email: req.body.email }, (err, user) => {
-        if (err) throw err;
-        if (!user) {
-            res.json({ success: false, message: 'User not found' });
-        } else if (user) {
-            let validPassword = user.comparePassword(req.body.password);
-            if (!validPassword) {
-                res.json({ success: false, message: 'Wrong password' });
+//allow CRUD operations on students only if the user is logged in
+app.use((req, res, next) => {
+    let token = req.cookies.token;
+    if (token) {
+        jwt.verify(token, config.secret, (err, decoded) => {
+            if (err) {
+                res.json({ success: false, message: 'Token is not valid' });
             } else {
-                let token = jwt.sign({ userId: user._id }, config.secret, { expiresIn: '24h' });
-                res.json({ success: true, message: 'Success!', token: token, user: { name: user.name } });
+                req.decoded = decoded;
+                next();
             }
-        }
-    });
+        });
+    } else {
+        res.json({ success: false, message: 'Auth token is not supplied' });
+    }
 });
 
-app.get('/profile', (req, res) => {
-    res.send('Profile');
-});
+//Students
+app.get('/students', Studentcontroller.get_all_students);
+app.get('/students/:id', Studentcontroller.get_student_details);
+app.get('/addstudent', Studentcontroller.add_student_page);
+app.post('/students', Studentcontroller.add_student);
+app.get('/updatestudent/:id', Studentcontroller.update_student_page);
+app.put('/students/:id', Studentcontroller.update_student);
+app.get('/deletestudent/:id', Studentcontroller.delete_student_page);
+app.delete('/students/:id', Studentcontroller.delete_student);
 
 app.listen(port, () => {
     console.log('Server started on port ' + port);

@@ -1,0 +1,56 @@
+<!-- Student table with data received from /students endpoint using jwt token stored in cookie -->
+<html>
+<head>
+    <title>Student</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-default">
+                <!-- h3 tag and button should be in the same line in the div class -->
+                <div class="panel-heading" style="display:flex;text-align: center;">
+                    <h3 class="panel-title" style="flex: 6;">Student List</h3>
+                    <button type="button" class="btn btn-primary" style="flex: 1;" onclick="window.location.href='/addstudent'">Add Student</button>
+                    <!--logout button-->
+                    <button type="button" class="btn btn-primary" style="margin-left: 10px;flex: 1;" onclick="window.location.href='/logout'">Logout</button>
+                </div>
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Student Email</th>
+                            <th>Student Class</th>
+                            <th>Student Semester</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- show message if there are no students -->
+                        <% if(students.length == 0){ %>
+                            <tr>
+                                <td colspan="5" style="text-align: center;">No students found</td>
+                            </tr>
+                        <% } %>
+                        <% for(var i=0; i<students.length; i++){ %>
+                            <tr>
+                                <td><%= students[i].name %></td>
+                                <td><%= students[i].email %></td>
+                                <td><%= students[i].class %></td>
+                                <td><%= students[i].semester %></td>
+                                <!-- update and delete button -->
+                                <td>
+                                    <a href="/updatestudent/<%= students[i]._id %>" class="btn btn-primary">Update</a>
+                                    <a href="/deletestudent/<%= students[i]._id %>" class="btn btn-danger">Delete</a>
+                                </td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
