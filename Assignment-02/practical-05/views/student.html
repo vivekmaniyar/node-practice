@@ -1,0 +1,66 @@
+<!-- Student table with data received from /students endpoint using jwt token stored in cookie -->
+<html>
+<head>
+    <title>Student</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- retrieve students -->
+    <script>
+        $(document).ready(function(){
+            $.ajax({
+                url: '/students',
+                type: 'GET',
+                success: function(response) {
+                    var students = response.students;
+                    var table = $('#studenttable');
+                    // display message if no students found
+                    if(students.length == 0) {
+                        table.append('<tr><td colspan="6" style="text-align: center;">No students found</td></tr>');
+                    }
+                    for (var i = 0; i < students.length; i++) {
+                        var student = students[i];
+                        var row = $('<tr>');
+                        row.append($('<td>').text(student.name));
+                        row.append($('<td>').text(student.email));
+                        row.append($('<td>').text(student.class));
+                        row.append($('<td>').text(student.semester));
+                        row.append($('<td>').html('<a href="/updatestudent.html?' + student._id + '">Update</a>'));
+                        row.append($('<td>').html('<a href="/deletestudent.html?' + student._id + '">Delete</a>'));
+                        table.append(row);
+                    }
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-default">
+                <!-- h3 tag and button should be in the same line in the div class -->
+                <div class="panel-heading" style="display:flex;text-align: center;">
+                    <h3 class="panel-title" style="flex: 6;">Student List</h3>
+                    <button type="button" class="btn btn-primary" style="flex: 1;" onclick="window.location.href='/addstudent.html'">Add Student</button>
+                    <!--logout button-->
+                    <button type="button" class="btn btn-primary" style="margin-left: 10px;flex: 1;" onclick="window.location.href='/logout'">Logout</button>
+                </div>
+                <table class="table table-bordered" id="studenttable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Class</th>
+                            <th>Semester</th>
+                            <th>Update</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
