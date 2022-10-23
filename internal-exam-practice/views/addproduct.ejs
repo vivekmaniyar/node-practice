@@ -1,0 +1,38 @@
+<!-- Add product with Image -->
+
+<html>
+    <head>
+        <title>Add Product</title>
+    </head>
+    <body>
+        <h1>Add Product</h1>
+        <form action="/addproduct" method="post" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td>Image</td>
+                    <td><input type="file" name="productImage" accept="image/jpeg, image/png"></td>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="title"></td>
+                </tr>
+                <tr>
+                    <td>Price</td>
+                    <td><input type="number" name="price"></td>
+                </tr>
+                <tr>
+                    <td>Description</td>
+                    <td><input type="text" name="description"></td>
+                </tr>
+                <tr>
+                    <td>Category</td>
+                    <td><input type="text" name="category"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Add Product"></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
