@@ -1,0 +1,16 @@
+{
+  "name": "jwt-demo",
+  "version": "1.0.0",
+  "description": "Demo of jsonwebtoken",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vivek Maniyar",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^8.5.1"
+  }
+}
